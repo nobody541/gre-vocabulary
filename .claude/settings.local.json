@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s \"C:\\\\Users\\\\Hau Vu\\\\Desktop\\\\2026\\\\GRE\\\\app\")"
+    ]
+  }
+}

@@ -3,8 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="icon.png" rel="icon">
-    <title>GRE Vocabulary</title>
+    <meta name="description" content="Free GRE vocabulary trainer with 300 high-frequency words. Study with flashcards, definition quizzes, and fill-in-the-blank exercises to ace the GRE verbal section.">
+    <meta name="keywords" content="GRE vocabulary, GRE words, GRE flashcards, GRE verbal prep, GRE quiz, GRE fill in the blank, graduate record examination, GRE study tool">
+    <meta name="author" content="GRE Vocab Trainer">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="GRE Vocabulary Trainer — 300 High-Frequency Words">
+    <meta property="og:description" content="Master GRE vocabulary with flashcards, definition quizzes, and fill-in-the-blank exercises. Track your progress and study smarter.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="icon.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="GRE Vocabulary Trainer — 300 High-Frequency Words">
+    <meta name="twitter:description" content="Free interactive GRE vocab study tool with flashcards, quizzes, and sentence completion practice.">
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="canonical" href="">
+    <title>GRE Vocabulary Trainer — 300 High-Frequency Flashcards, Quizzes &amp; Fill-in-the-Blank</title>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "GRE Vocabulary Trainer",
+        "description": "Free GRE vocabulary trainer with 300 high-frequency words, flashcards, quizzes, and fill-in-the-blank exercises.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "educationalUse": "Self-study",
+        "learningResourceType": "Flashcard",
+        "audience": { "@type": "EducationalAudience", "educationalRole": "student" }
+    }
+    </script>
     <style>
         * {
             margin: 0;
@@ -33,7 +59,7 @@
 
         h1 {
             color: #667eea;
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 10px;
             text-align: center;
         }
@@ -53,13 +79,14 @@
 
         .mode-btn {
             flex: 1;
-            padding: 12px;
+            padding: 12px 8px;
             border: 2px solid #667eea;
             background: white;
             color: #667eea;
             border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 13px;
             transition: all 0.3s;
         }
 
@@ -142,6 +169,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .card-back {
@@ -184,6 +212,7 @@
             display: flex;
             gap: 15px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -290,39 +319,120 @@
             text-align: center;
             margin-top: 15px;
         }
+
+        /* Fill-in-the-blank styles */
+        .fill-blank-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .fill-blank-sentence {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .fill-blank-sentence .blank {
+            display: inline-block;
+            border-bottom: 3px solid #667eea;
+            min-width: 120px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .fill-blank-choices {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .fill-blank-choice {
+            padding: 15px 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+
+        .fill-blank-choice:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+
+        .fill-blank-choice.correct {
+            border-color: #10b981;
+            background: #d1fae5;
+        }
+
+        .fill-blank-choice.incorrect {
+            border-color: #ef4444;
+            background: #fee2e2;
+        }
+
+        .fill-blank-choice.disabled {
+            pointer-events: none;
+        }
+
+        .rationale {
+            margin-top: 15px;
+            padding: 15px;
+            background: #eff6ff;
+            border-left: 4px solid #667eea;
+            border-radius: 0 10px 10px 0;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .fill-blank-counter {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
     </style>
-     <script src="voca.js"></script>
+    <script src="voca.js"></script>
+    <script src="voca_fill_blank.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>📚 GRE Vocab Trainer</h1>
-        <p class="subtitle">Master high-frequency GRE words with flashcards and quizzes</p>
+    <main class="container" role="main">
+        <header>
+            <h1>GRE Vocab Trainer</h1>
+            <p class="subtitle">Master 300 high-frequency GRE words with flashcards, quizzes, and sentence completion</p>
+        </header>
 
-        <div class="mode-selector">
-            <button class="mode-btn active" onclick="setMode('flashcard')">Flashcards</button>
-            <button class="mode-btn" onclick="setMode('quiz')">Quiz Mode</button>
-        </div>
+        <nav class="mode-selector" aria-label="Study mode selector">
+            <button class="mode-btn active" onclick="setMode('flashcard', this)">Flashcards</button>
+            <button class="mode-btn" onclick="setMode('quiz', this)">Quiz</button>
+            <button class="mode-btn" onclick="setMode('fillblank', this)">Fill in Blank</button>
+        </nav>
 
-        <div class="progress-bar">
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
             <div class="progress-fill" id="progressFill"></div>
         </div>
 
-        <div class="stats">
+        <section class="stats" aria-label="Study progress statistics">
             <div class="stat">
                 <div class="stat-value" id="currentCard">1</div>
                 <div class="stat-label">Current</div>
             </div>
             <div class="stat">
-                <div class="stat-value" id="totalCards">50</div>
+                <div class="stat-value" id="totalCards">300</div>
                 <div class="stat-label">Total</div>
             </div>
             <div class="stat">
                 <div class="stat-value" id="learned">0</div>
                 <div class="stat-label">Learned</div>
             </div>
-        </div>
+        </section>
 
-        <div id="flashcardView">
+        <section id="flashcardView" aria-label="Flashcard study mode">
             <div class="card" id="flashcard" onclick="flipCard()">
                 <div class="card-front">
                     <div class="word" id="word"></div>
@@ -335,16 +445,13 @@
                 </div>
             </div>
             <div class="controls">
-                <button class="btn btn-danger" onclick="markCard(false)">❌ Need Review</button>
+                <button class="btn btn-danger" onclick="markCard(false)">Need Review</button>
                 <button class="btn btn-secondary" onclick="nextCard()">Skip</button>
-                <button class="btn btn-success" onclick="markCard(true)">✓ Got It!</button>
-                
-                <!-- <button class="btn btn-secondary" onclick="resetProgress()">🔄 Reset Progress</button> -->
-
+                <button class="btn btn-success" onclick="markCard(true)">Got It!</button>
             </div>
-        </div>
+        </section>
 
-        <div id="quizView" style="display: none;">
+        <section id="quizView" style="display: none;" aria-label="Definition quiz mode">
             <div class="card" style="cursor: default;">
                 <div class="word" id="quizWord"></div>
                 <div class="part-of-speech" id="quizPartOfSpeech"></div>
@@ -354,46 +461,76 @@
             <div class="controls">
                 <button class="btn btn-primary" onclick="nextQuiz()" id="nextQuizBtn" style="display: none;">Next Question</button>
             </div>
-        </div>
-    </div>
-    
-    <script>
-        
+        </section>
 
+        <section id="fillBlankView" style="display: none;" aria-label="Fill in the blank practice mode">
+            <div class="fill-blank-counter" id="fillBlankCounter"></div>
+            <div class="fill-blank-card">
+                <p class="fill-blank-sentence" id="fillBlankSentence"></p>
+                <div class="fill-blank-choices" id="fillBlankChoices"></div>
+                <div id="fillBlankFeedback"></div>
+                <div id="fillBlankRationale"></div>
+            </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="nextFillBlank()" id="nextFillBlankBtn" style="display: none;">Next Question</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
         let currentIndex = 0;
         let learnedCount = 0;
         let currentMode = 'flashcard';
         let isFlipped = false;
         let quizAnswered = false;
 
-        // ADD THIS - Load saved progress from localStorage
+        // Fill-in-the-blank state
+        let fillBlankIndex = 0;
+        let fillBlankAnswered = false;
+        let shuffledFillBlank = [];
+
+        // Load saved progress from localStorage
         let learnedWords = JSON.parse(localStorage.getItem('learnedWords')) || [];
         let reviewWords = JSON.parse(localStorage.getItem('reviewWords')) || [];
 
         function initApp() {
-    // Load saved progress
             learnedCount = learnedWords.length;
             currentIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
+
+            // Shuffle fill-in-the-blank questions
+            fillBlankIndex = parseInt(localStorage.getItem('fillBlankIndex')) || 0;
+            shuffledFillBlank = shuffleArray([...fillBlankQuestions]);
+
             updateStats();
             loadFlashcard();
         }
-        
-       
 
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
 
-        function setMode(mode) {
+        function setMode(mode, btn) {
             currentMode = mode;
-            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.getElementById('flashcardView').style.display = 'none';
+            document.getElementById('quizView').style.display = 'none';
+            document.getElementById('fillBlankView').style.display = 'none';
+
             if (mode === 'flashcard') {
                 document.getElementById('flashcardView').style.display = 'block';
-                document.getElementById('quizView').style.display = 'none';
                 loadFlashcard();
-            } else {
-                document.getElementById('flashcardView').style.display = 'none';
+            } else if (mode === 'quiz') {
                 document.getElementById('quizView').style.display = 'block';
                 loadQuiz();
+            } else {
+                document.getElementById('fillBlankView').style.display = 'block';
+                loadFillBlank();
             }
         }
 
@@ -402,8 +539,8 @@
             document.getElementById('word').textContent = card.word;
             document.getElementById('partOfSpeech').textContent = card.pos;
             document.getElementById('definition').textContent = card.def;
-            document.getElementById('example').textContent = `"${card.example}"`;
-            
+            document.getElementById('example').textContent = '"' + card.example + '"';
+
             document.getElementById('flashcard').classList.remove('flipped');
             isFlipped = false;
         }
@@ -422,30 +559,27 @@
         }
 
         function markCard(learned) {
-        const currentWord = vocabulary[currentIndex].word;
-        
-        if (learned) {
-            // Add to learned, remove from review if it was there
-            if (!learnedWords.includes(currentWord)) {
-                learnedWords.push(currentWord);
-                learnedCount++;
+            const currentWord = vocabulary[currentIndex].word;
+
+            if (learned) {
+                if (!learnedWords.includes(currentWord)) {
+                    learnedWords.push(currentWord);
+                    learnedCount++;
+                }
+                reviewWords = reviewWords.filter(w => w !== currentWord);
+            } else {
+                if (!reviewWords.includes(currentWord)) {
+                    reviewWords.push(currentWord);
+                }
+                learnedWords = learnedWords.filter(w => w !== currentWord);
+                learnedCount = learnedWords.length;
             }
-            reviewWords = reviewWords.filter(w => w !== currentWord);
-        } else {
-            // Add to review, remove from learned if it was there
-            if (!reviewWords.includes(currentWord)) {
-                reviewWords.push(currentWord);
-            }
-            learnedWords = learnedWords.filter(w => w !== currentWord);
-            learnedCount = learnedWords.length;
+
+            localStorage.setItem('learnedWords', JSON.stringify(learnedWords));
+            localStorage.setItem('reviewWords', JSON.stringify(reviewWords));
+
+            nextCard();
         }
-        
-        // Save to localStorage
-        localStorage.setItem('learnedWords', JSON.stringify(learnedWords));
-        localStorage.setItem('reviewWords', JSON.stringify(reviewWords));
-        
-        nextCard();
-    }
 
         function loadQuiz() {
             quizAnswered = false;
@@ -455,7 +589,6 @@
             document.getElementById('quizFeedback').innerHTML = '';
             document.getElementById('nextQuizBtn').style.display = 'none';
 
-            // Generate wrong answers
             const wrongAnswers = [];
             while (wrongAnswers.length < 3) {
                 const randomIndex = Math.floor(Math.random() * vocabulary.length);
@@ -464,14 +597,12 @@
                 }
             }
 
-            // Combine and shuffle
             const allOptions = [card.def, ...wrongAnswers];
             allOptions.sort(() => Math.random() - 0.5);
 
-            // Display options
             const optionsContainer = document.getElementById('quizOptions');
             optionsContainer.innerHTML = '';
-            
+
             allOptions.forEach(option => {
                 const div = document.createElement('div');
                 div.className = 'quiz-option';
@@ -483,11 +614,11 @@
 
         function checkAnswer(selected, correct) {
             if (quizAnswered) return;
-            
+
             quizAnswered = true;
             const options = document.querySelectorAll('.quiz-option');
             const feedback = document.getElementById('quizFeedback');
-            
+
             options.forEach(option => {
                 option.style.pointerEvents = 'none';
                 if (option.textContent === correct) {
@@ -500,11 +631,11 @@
 
             if (selected === correct) {
                 feedback.className = 'feedback correct';
-                feedback.textContent = '✓ Correct! Great job!';
+                feedback.textContent = 'Correct! Great job!';
                 learnedCount++;
             } else {
                 feedback.className = 'feedback incorrect';
-                feedback.textContent = '✗ Not quite. The correct definition is highlighted above.';
+                feedback.textContent = 'Not quite. The correct definition is highlighted above.';
             }
 
             document.getElementById('nextQuizBtn').style.display = 'block';
@@ -518,23 +649,107 @@
             loadQuiz();
         }
 
+        // --- Fill in the Blank ---
+
+        function loadFillBlank() {
+            fillBlankAnswered = false;
+            if (shuffledFillBlank.length === 0) return;
+
+            const q = shuffledFillBlank[fillBlankIndex % shuffledFillBlank.length];
+
+            document.getElementById('fillBlankCounter').textContent =
+                'Question ' + (fillBlankIndex + 1) + ' of ' + shuffledFillBlank.length;
+
+            // Render sentence with blank
+            const sentenceEl = document.getElementById('fillBlankSentence');
+            sentenceEl.innerHTML = q.sentence.replace('____', '<span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+
+            // Render choices
+            const choicesEl = document.getElementById('fillBlankChoices');
+            choicesEl.innerHTML = '';
+
+            q.choices.forEach(choice => {
+                const div = document.createElement('div');
+                div.className = 'fill-blank-choice';
+                div.textContent = choice;
+                div.onclick = () => checkFillBlank(div, choice, q);
+                choicesEl.appendChild(div);
+            });
+
+            document.getElementById('fillBlankFeedback').innerHTML = '';
+            document.getElementById('fillBlankRationale').innerHTML = '';
+            document.getElementById('nextFillBlankBtn').style.display = 'none';
+        }
+
+        function checkFillBlank(selectedEl, choice, question) {
+            if (fillBlankAnswered) return;
+            fillBlankAnswered = true;
+
+            const choices = document.querySelectorAll('.fill-blank-choice');
+            choices.forEach(el => el.classList.add('disabled'));
+
+            // Highlight correct answer
+            choices.forEach(el => {
+                if (el.textContent === question.answer) {
+                    el.classList.add('correct');
+                }
+            });
+
+            const feedback = document.getElementById('fillBlankFeedback');
+            const rationale = document.getElementById('fillBlankRationale');
+
+            if (choice === question.answer) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = 'Correct!';
+
+                // Fill the blank with the answer
+                const sentenceEl = document.getElementById('fillBlankSentence');
+                sentenceEl.innerHTML = question.sentence.replace('____',
+                    '<span class="blank">' + question.answer + '</span>');
+            } else {
+                selectedEl.classList.add('incorrect');
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = 'Not quite. The answer is "' + question.answer + '".';
+
+                const sentenceEl = document.getElementById('fillBlankSentence');
+                sentenceEl.innerHTML = question.sentence.replace('____',
+                    '<span class="blank">' + question.answer + '</span>');
+            }
+
+            rationale.className = 'rationale';
+            rationale.textContent = question.rationale;
+
+            document.getElementById('nextFillBlankBtn').style.display = 'block';
+        }
+
+        function nextFillBlank() {
+            fillBlankIndex = (fillBlankIndex + 1) % shuffledFillBlank.length;
+            localStorage.setItem('fillBlankIndex', fillBlankIndex);
+            loadFillBlank();
+        }
+
+        // --- Stats ---
+
         function updateStats() {
             document.getElementById('currentCard').textContent = currentIndex + 1;
             document.getElementById('totalCards').textContent = vocabulary.length;
             document.getElementById('learned').textContent = learnedCount;
-            
+
             const progress = ((currentIndex + 1) / vocabulary.length) * 100;
             document.getElementById('progressFill').style.width = progress + '%';
         }
+
         function resetProgress() {
             if (confirm('Are you sure you want to reset all progress?')) {
                 localStorage.removeItem('learnedWords');
                 localStorage.removeItem('reviewWords');
                 localStorage.removeItem('currentIndex');
+                localStorage.removeItem('fillBlankIndex');
                 learnedWords = [];
                 reviewWords = [];
                 learnedCount = 0;
                 currentIndex = 0;
+                fillBlankIndex = 0;
                 updateStats();
                 loadFlashcard();
             }
