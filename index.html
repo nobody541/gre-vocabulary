@@ -188,7 +188,29 @@
             font-size: 36px;
             font-weight: bold;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+        }
+
+        .speak-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #667eea;
+            font-size: 22px;
+            padding: 4px 8px;
+            border-radius: 50%;
+            transition: background 0.2s, transform 0.1s;
+            margin-bottom: 14px;
+            line-height: 1;
+        }
+
+        .speak-btn:hover {
+            background: #ede9fd;
+            transform: scale(1.15);
+        }
+
+        .speak-btn:active {
+            transform: scale(0.95);
         }
 
         .part-of-speech {
@@ -444,6 +466,7 @@
             <div class="card" id="flashcard" onclick="flipCard()">
                 <div class="card-front">
                     <div class="word" id="word"></div>
+                    <button class="speak-btn" onclick="speakWord(event)" title="Hear pronunciation" aria-label="Pronounce word">&#128264;</button>
                     <p class="hint">Click to see definition</p>
                 </div>
                 <div class="card-back">
@@ -551,6 +574,18 @@
 
             document.getElementById('flashcard').classList.remove('flipped');
             isFlipped = false;
+        }
+
+        function speakWord(event) {
+            event.stopPropagation();
+            const word = vocabulary[currentIndex].word;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
         }
 
         function flipCard() {
